@@ -1,3 +1,4 @@
+import os
 import dash
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
@@ -5,9 +6,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output, State
-from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
-import numpy as np
 
 
 FA = "https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -222,9 +221,9 @@ def update_graph(selected_dropdown, radio_items_value, checklist_value):
         method = ''
         for i in checklist_value:
             method += str(i)
-        filename = './out/'+stock + '_' + radio_items_value + '_' + method + '.csv'
-
-        df = pd.read_csv(filename)
+        path = os.abspath('/app/out/'+stock + '_' + radio_items_value + '_' + method + '.csv')
+        print(path)
+        df = pd.read_csv(path)
         df.head()
         df["Date"] = pd.to_datetime(df.Date, format="%Y-%m-%d")
         df.index = df['Date']
