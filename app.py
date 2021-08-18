@@ -221,7 +221,7 @@ def update_graph(selected_dropdown, radio_items_value, checklist_value):
         method = ''
         for i in checklist_value:
             method += str(i)
-        path = os.abspath('/app/out/'+stock + '_' + radio_items_value + '_' + method + '.csv')
+        path = os.path.abspath('/app/out/'+stock + '_' + radio_items_value + '_' + method + '.csv')
         print(path)
         df = pd.read_csv(path)
         df.head()
